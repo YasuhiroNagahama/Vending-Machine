@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+.body {
+  color: #333;
+  font-family: "Noto Sans JP", sans-serif;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.l_container {
+  width: 100%;
+  height: 100vh;
+  background: url(https://1.bp.blogspot.com/-VI4sHNhDuAg/UaVVN4F5BXI/AAAAAAAAUCI/wfAyrH4BEqs/s400/sakana_mure.png.jpg)
+    repeat;
+  background-position: 0 0;
+  -webkit-animation: bgroop 10s linear infinite;
+  animation: bgroop 10s linear infinite;
+}
+@-webkit-keyframes bgroop {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -400px 0;
+  }
+}
+@keyframes bgroop {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -400px 0;
+  }
+}
+
+.l_contents-all {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.l_contents {
+  width: 90%;
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(119, 208, 237, 0.49);
+  border: 2px solid blue;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+@media screen and (max-width: 1080px) {
+  .l_contents {
+    flex-direction: column;
+  }
+}
+
+.l_contents::-webkit-scrollbar {
+  display: none;
+}
+
+.l_contents_thumb-wrapper {
+  box-shadow: 2px 2px 2px rgba(0, 23, 43, 0.3);
+}
+
+.l_contents_button {
+  width: 40px;
+  height: 40px;
+  border: 2px solid blue;
+  color: blue;
+  background: white;
+  box-shadow: 2px 2px 2px rgba(0, 23, 43, 0.9);
+}
+
+.l_contents_button:hover {
+  border: none;
+  box-shadow: none;
+  color: white;
+  background: blue;
+  transform: scale(1.2) rotate(360deg);
+  transition: 0.5s;
+}
+
+.deplete-animation {
+  animation: deplete 1s linear forwards;
+}
+
+.expand-animation {
+  animation: deplete 1s linear reverse forwards;
+}
+
+@keyframes deplete {
+  0% {
+    width: 100%;
+    opacity: 1;
+  }
+  100% {
+    width: 0%;
+    opacity: 0;
+  }
+}
+
+.leftContents {
+  max-width: 600px;
+}
+
+.rightContents {
+  width: 300px;
+  margin-top: 40px;
+}
+@media screen and (min-width: 1080px) {
+  .rightContents {
+    margin-top: 0;
+    margin-left: 40px;
+  }
+}
+
+.rightContents-info {
+  color: blue;
+}
