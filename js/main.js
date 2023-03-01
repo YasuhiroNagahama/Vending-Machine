@@ -47,6 +47,48 @@ class FishObject {
 
     return imgWrap;
   }
+
+  animateMain(currentElement, nextElement, animationType) {
+    main.innerHTML = "";
+    main.append(nextElement);
+
+    extra.innerHTML = "";
+    extra.append(currentElement);
+
+    main.classList.add("expand-animation");
+    extra.classList.add("deplete-animation");
+
+    if (animationType === "right") {
+      sliderShow.innerHTML = "";
+      sliderShow.append(extra);
+      sliderShow.append(main);
+    } else if (animationType === "left") {
+      sliderShow.innerHTML = "";
+      sliderShow.append(main);
+      sliderShow.append(extra);
+    }
+  }
+
+  slideJump(nextIndex) {
+    // 現在のindexを保存
+    const currentIndex = Number(main.getAttribute("date-index"));
+
+    number.innerHTML = "No." + String(nextIndex + 1);
+    fishName.innerHTML = "Name : " + fishes[nextIndex].name;
+    price.innerHTML = "Price : " + fishes[nextIndex].price;
+
+    // 現在のitem（画像）と次のitem（画像）を保存
+    const currentElement = sliderItems.item(currentIndex);
+    const nextElement = sliderItems.item(nextIndex);
+
+    main.setAttribute("date-index", nextIndex.toString());
+
+    const animationType = currentIndex < nextIndex ? "right" : "left";
+
+    if (nextIndex != currentIndex) {
+      this.animateMain(currentElement, nextElement, animationType);
+    }
+  }
 }
 
 const fishes = [
@@ -97,7 +139,7 @@ sliderShow.classList.add(
 main.classList.add("main");
 extra.classList.add("extra");
 
-// あらかじめ登場する画像を代入しておく
+// あらかじめ登場する画像を入れる
 main.append(sliderItems[0]);
 
 sliderShow.append(main);
@@ -109,10 +151,12 @@ const info = document.createElement("div");
 info.classList.add("h5", "fw-bold", "mb-5", "rightContents-info");
 
 const number = document.createElement("p");
-number.innerHTML = "No.1";
 const fishName = document.createElement("p");
-fishName.innerHTML = "Name : " + fishes[0].name;
 const price = document.createElement("p");
+
+// 初期の写真についての情報をあらかじめ設定
+number.innerHTML = "No.1";
+fishName.innerHTML = "Name : " + fishes[0].name;
 price.innerHTML = "Price : " + fishes[0].price;
 
 info.append(number);
@@ -145,54 +189,12 @@ for (let i = 0; i < fishes.length; i++) {
   buttonWrap.append(button);
 
   button.addEventListener("click", function () {
-    slideJump(i);
+    fishes[i].slideJump(i);
   });
 }
 
 rightContents.append(info);
 rightContents.append(buttonWrap);
 
-// data-indexという属性を作り、その中身に画像のindexを入れておく
-main.setAttribute("data-index", "0");
-
-function slideJump(nextIndex) {
-  // 現在のindexを保存
-  const currentIndex = parseInt(main.getAttribute("data-index"));
-
-  number.innerHTML = "No." + String(nextIndex + 1);
-  fishName.innerHTML = "Name : " + fishes[nextIndex].name;
-  price.innerHTML = "Price : " + fishes[nextIndex].price;
-
-  // 現在のitem（画像）と次のitem（画像）を保存
-  const currentElement = sliderItems.item(currentIndex);
-  const nextElement = sliderItems.item(nextIndex);
-
-  main.setAttribute("data-index", nextIndex.toString());
-
-  const animationType = currentIndex < nextIndex ? "right" : "left";
-
-  if (nextIndex != currentIndex) {
-    animateMain(currentElement, nextElement, animationType);
-  }
-}
-
-function animateMain(currentElement, nextElement, animationType) {
-  main.innerHTML = "";
-  main.append(nextElement);
-
-  extra.innerHTML = "";
-  extra.append(currentElement);
-
-  main.classList.add("expand-animation");
-  extra.classList.add("deplete-animation");
-
-  if (animationType === "right") {
-    sliderShow.innerHTML = "";
-    sliderShow.append(extra);
-    sliderShow.append(main);
-  } else if (animationType === "left") {
-    sliderShow.innerHTML = "";
-    sliderShow.append(main);
-    sliderShow.append(extra);
-  }
-}
+// date-indexという属性を作り、その中身に画像のindexを入れておく
+main.setAttribute("date-index", "0");
