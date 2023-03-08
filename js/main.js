@@ -1,7 +1,7 @@
 const target = document.getElementById("target");
+const imgList = document.getElementById("img-list");
 const leftContents = document.getElementById("left-contetns");
 const rightContents = document.getElementById("right-contetns");
-const imgList = document.getElementById("img-list");
 
 class FishObject {
   constructor(name, price) {
@@ -141,6 +141,8 @@ extra.classList.add("extra");
 
 // あらかじめ登場する画像を入れる
 main.append(sliderItems[0]);
+// date-indexという属性を作り、その中身に画像のindexを入れておく
+main.setAttribute("date-index", "0");
 
 sliderShow.append(main);
 sliderShow.append(extra);
@@ -195,6 +197,3 @@ for (let i = 0; i < fishes.length; i++) {
 
 rightContents.append(info);
 rightContents.append(buttonWrap);
-
-// date-indexという属性を作り、その中身に画像のindexを入れておく
-main.setAttribute("date-index", "0");
