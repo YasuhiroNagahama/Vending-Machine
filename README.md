@@ -3,7 +3,8 @@
 Vending Machine
 
 # URL
-https://yasuhironagahama.github.io/Recursion-Project-2-1/
+
+https://yasuhironagahama.github.io/Vending-Machine/
 
 # Explain
 
