@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recursion Project-2-1</title>
+    <title>Vending Machine</title>
 
     <!-- bootstrapの読み込み -->
     <link
@@ -30,18 +30,37 @@
     <script src="js/main.js" defer></script>
   </head>
   <body>
-    <div class="l_container w-100">
-      <div id="target" class="l_contents-all vh-100 position-relative">
+    <div class="container">
+      <div class="contents-wrapper vh-100 position-relative">
         <div
-          class="l_contents d-flex justify-content-between align-items-center p-4 position-absolute rounded"
+          class="contents d-flex justify-content-between align-items-center p-4 position-absolute rounded"
         >
-          <div id="left-contetns" class="leftContents">
+          <div class="left-contents">
+            <div id="fish-img-list" class="d-none slider-data col-12"></div>
             <div
-              id="img-list"
-              class="img-list d-none slider-data col-12"
+              id="animation-img-wrapper"
+              class="d-flex flex-nowrap overflow-hiddens"
+            >
+              <div id="fish-img-main" data-index="0">
+                <img
+                  class="fish-img w-100 border border-4 border-dark rounded"
+                  src="img/ヤマメ.jpg"
+                />
+              </div>
+              <div id="fish-img-extra"></div>
+            </div>
+          </div>
+          <div class="right-contents">
+            <div class="right-contents-info h5 fw-bold mb-5 text-success">
+              <p id="fish-number">No.1</p>
+              <p id="fish-name">Name : ヤマメ</p>
+              <p id="fish-price">Price : 300</p>
+            </div>
+            <div
+              id="fish-btn-wrap"
+              class="fish-btn-wrapper d-flex justify-content-center align-items-center flex-wrap gap-4"
             ></div>
           </div>
-          <div id="right-contetns" class="rightContents"></div>
         </div>
       </div>
     </div>

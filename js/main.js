@@ -1,199 +1,182 @@
-const target = document.getElementById("target");
-const imgList = document.getElementById("img-list");
-const leftContents = document.getElementById("left-contetns");
-const rightContents = document.getElementById("right-contetns");
+class Fish {
+  // 魚の画像をオブジェクトとして保存
+  static pictureDictionary = {
+    ヤマメ: "img/ヤマメ.jpg",
+    アマゴ: "img/アマゴ.jpg",
+    イワナ: "img/イワナ.jpg",
+    カワムツ: "img/カワムツ.jpg",
+    オイカワ: "img/オイカワ.jpg",
+    ウグイ: "img/ウグイ.jpg",
+    アユ: "img/アユ.jpg",
+    コイ: "img/コイ.jpg",
+    ニゴイ: "img/ニゴイ.jpg",
+    フナ: "img/フナ.jpg",
+    タナゴ: "img/タナゴ.jpg",
+    ナマズ: "img/ナマズ.jpg",
+    寿司職人: "img/寿司職人.jpg",
+    アカザ: "img/アカザ.jpg",
+    ウナギ: "img/ウナギ.jpg",
+    ドジョウ: "img/ドジョウ.jpg",
+    ニジマス: "img/ニジマス.jpg",
+    ブラックバス: "img/ブラックバス.jpg",
+    ブルーギル: "img/ブルーギル.jpg",
+    寿司: "img/寿司.jpg",
+  };
 
-class FishObject {
   constructor(name, price) {
     this.name = name;
     this.price = price;
-    this.pictureDictionary = {
-      ヤマメ: "img/ヤマメ.jpg",
-      アマゴ: "img/アマゴ.jpg",
-      イワナ: "img/イワナ.jpg",
-      カワムツ: "img/カワムツ.jpg",
-      オイカワ: "img/オイカワ.jpg",
-      ウグイ: "img/ウグイ.jpg",
-      アユ: "img/アユ.jpg",
-      コイ: "img/コイ.jpg",
-      ニゴイ: "img/ニゴイ.jpg",
-      フナ: "img/フナ.jpg",
-      タナゴ: "img/タナゴ.jpg",
-      ナマズ: "img/ナマズ.jpg",
-      寿司職人: "img/寿司職人.jpg",
-      アカザ: "img/アカザ.jpg",
-      ウナギ: "img/ウナギ.jpg",
-      ドジョウ: "img/ドジョウ.jpg",
-      ニジマス: "img/ニジマス.jpg",
-      ブラックバス: "img/ブラックバス.jpg",
-      ブルーギル: "img/ブルーギル.jpg",
-      寿司: "img/寿司.jpg",
-    };
   }
 
-  getHtmlContainertPhoto() {
-    const imgWrap = document.createElement("div");
-    imgWrap.classList.add(
-      "l_contents_thumb-wrapper",
+  // HTML要素を作成し、魚の画像を設定するメソッド
+  setFishImage() {
+    const fishImgWrap = document.createElement("div");
+    fishImgWrap.classList.add(
+      "fish-img-wrapper",
       "d-flex",
-      "justify-content-center"
+      "justify-content-center",
+      "align-items-center"
     );
 
-    const img = document.createElement("img");
-    img.classList.add("l_contents_thumb", "w-100", "slider-item");
-    img.src = this.pictureDictionary[this.name];
+    const fishImg = document.createElement("img");
+    fishImg.classList.add(
+      "fish-img",
+      "w-100",
+      "border",
+      "border-4",
+      "border-dark",
+      "rounded"
+    );
+    fishImg.src = Fish.pictureDictionary[this.name];
+    fishImg.alt = this.name;
 
-    imgWrap.append(img);
+    fishImgWrap.append(fishImg);
 
-    return imgWrap;
+    return fishImgWrap;
   }
 
-  animateMain(currentElement, nextElement, animationType) {
-    main.innerHTML = "";
-    main.append(nextElement);
+  // 魚の画像を更新するメソッド
+  updateFishImg(currentImg, nextImg, animationType) {
+    const animationImgWrap = document.getElementById("animation-img-wrapper");
+    const fishImgMain = document.getElementById("fish-img-main");
+    const fishImgExtra = document.getElementById("fish-img-extra");
 
-    extra.innerHTML = "";
-    extra.append(currentElement);
+    // 現在の中身を空にする
+    fishImgMain.innerHTML = "";
+    fishImgExtra.innerHTML = "";
 
-    main.classList.add("expand-animation");
-    extra.classList.add("deplete-animation");
+    fishImgMain.append(nextImg);
+    fishImgExtra.append(currentImg);
+
+    fishImgMain.classList.add("expand-animation");
+    fishImgExtra.classList.add("deplete-animation");
+
+    animationImgWrap.append(fishImgExtra);
+    animationImgWrap.append(fishImgMain);
 
     if (animationType === "right") {
-      sliderShow.innerHTML = "";
-      sliderShow.append(extra);
-      sliderShow.append(main);
+      animationImgWrap.append(fishImgExtra);
+      animationImgWrap.append(fishImgMain);
     } else if (animationType === "left") {
-      sliderShow.innerHTML = "";
-      sliderShow.append(main);
-      sliderShow.append(extra);
+      animationImgWrap.append(fishImgMain);
+      animationImgWrap.append(fishImgExtra);
     }
   }
 
-  slideJump(nextIndex) {
-    // 現在のindexを保存
-    const currentIndex = Number(main.getAttribute("date-index"));
+  // 魚の情報を更新するメソッド
+  updateFishInfo(nextIndex) {
+    document.getElementById("fish-number").innerHTML =
+      "No." + String(nextIndex + 1);
+    document.getElementById("fish-name").innerHTML =
+      "Name : " + fishInfoList[nextIndex].name;
+    document.getElementById("fish-price").innerHTML =
+      "Price : " + fishInfoList[nextIndex].price;
+  }
 
-    number.innerHTML = "No." + String(nextIndex + 1);
-    fishName.innerHTML = "Name : " + fishes[nextIndex].name;
-    price.innerHTML = "Price : " + fishes[nextIndex].price;
+  // ボタンがクリックされた時の処理を行うメソッド
+  buttonPushProcess(nextDataIndex, fishImgList) {
+    const fishImgMain = document.getElementById("fish-img-main");
+    const currentDataIndex = Number(fishImgMain.getAttribute("data-index"));
 
-    // 現在のitem（画像）と次のitem（画像）を保存
-    const currentElement = sliderItems.item(currentIndex);
-    const nextElement = sliderItems.item(nextIndex);
+    if (currentDataIndex == nextDataIndex) return false;
+    
+    const currentImg = fishImgList.item(currentDataIndex);
+    const nextImg = fishImgList.item(nextDataIndex);
+    const animationType = currentDataIndex < nextDataIndex ? "right" : "left";
 
-    main.setAttribute("date-index", nextIndex.toString());
+    fishImgMain.setAttribute("data-index", String(nextDataIndex));
 
-    const animationType = currentIndex < nextIndex ? "right" : "left";
+    this.updateFishInfo(nextDataIndex);
+    this.updateFishImg(currentImg, nextImg, animationType);
+  }
 
-    if (nextIndex != currentIndex) {
-      this.animateMain(currentElement, nextElement, animationType);
+  // ボタンがクリックされたときにbuttonPushProcessメソッドを呼び出すメソッド
+  static buttonEvent() {
+    const fishBtn = document.querySelectorAll(".fish-btn");
+    const fishImgList = document.querySelectorAll(".fish-img");
+
+    for (let i = 0; i < fishBtn.length; i++) {
+      fishBtn[i].addEventListener("click", function () {
+        fishInfoList[i].buttonPushProcess(i, fishImgList);
+      });
     }
   }
 }
 
-const fishes = [
-  new FishObject("ヤマメ", "300"),
-  new FishObject("アマゴ", "300"),
-  new FishObject("イワナ", "500"),
-  new FishObject("カワムツ", "30"),
-  new FishObject("オイカワ", "50"),
-  new FishObject("ウグイ", "100"),
-  new FishObject("アユ", "400"),
-  new FishObject("コイ", "1000"),
-  new FishObject("ニゴイ", "1200"),
-  new FishObject("フナ", "800"),
-  new FishObject("タナゴ", "600"),
-  new FishObject("ナマズ", "2000"),
-  new FishObject("寿司職人", "500000"),
-  new FishObject("アカザ", "5000"),
-  new FishObject("ウナギ", "3000"),
-  new FishObject("ドジョウ", "10"),
-  new FishObject("ニジマス", "250"),
-  new FishObject("ブラックバス", "250"),
-  new FishObject("ブルーギル", "150"),
-  new FishObject("寿司", "10000"),
+// 魚の情報を配列で保存
+const fishInfoList = [
+  new Fish("ヤマメ", "300"),
+  new Fish("アマゴ", "300"),
+  new Fish("イワナ", "500"),
+  new Fish("カワムツ", "30"),
+  new Fish("オイカワ", "50"),
+  new Fish("ウグイ", "100"),
+  new Fish("アユ", "400"),
+  new Fish("コイ", "1000"),
+  new Fish("ニゴイ", "1200"),
+  new Fish("フナ", "800"),
+  new Fish("タナゴ", "600"),
+  new Fish("ナマズ", "2000"),
+  new Fish("寿司職人", "500000"),
+  new Fish("アカザ", "5000"),
+  new Fish("ウナギ", "3000"),
+  new Fish("ドジョウ", "10"),
+  new Fish("ニジマス", "250"),
+  new Fish("ブラックバス", "250"),
+  new Fish("ブルーギル", "150"),
+  new Fish("寿司", "10000"),
 ];
 
-// 左側のコンテンツ（画像のリスト）をimgListに代入（d-noneを使い、見えなくしておく）
-for (let i = 0; i < fishes.length; i++) {
-  imgList.append(fishes[i].getHtmlContainertPhoto());
+// fishInfoListの各要素をsetFishImageメソッドに渡し、HTML要素にアペンドする関数
+function displayFishImg() {
+  const fishImgList = document.getElementById("fish-img-list");
+
+  for (let i = 0; i < fishInfoList.length; i++) {
+    fishImgList.append(fishInfoList[i].setFishImage());
+  }
 }
 
-// sliderItem（画像）を取得
-const sliderItems = document.querySelectorAll(".slider-item");
+// 設定されている魚の情報分のボタンを作成する関数
+function createFishBtn() {
+  const buttonWrap = document.getElementById("fish-btn-wrap");
 
-// スライドする際の画像を囲うdivを作成
-const sliderShow = document.createElement("div");
-// スライドする際に登場する画像を囲うdivを作成
-const main = document.createElement("div");
-// スライドする際に去っていく画像を囲うdivを作成
-const extra = document.createElement("div");
+  for (let i = 0; i < fishInfoList.length; i++) {
+    const button = document.createElement("button");
+    button.classList.add(
+      "fish-btn",
+      "fw-bold",
+      "rounded",
+      "d-flex",
+      "justify-content-center",
+      "align-items-center"
+    );
 
-sliderShow.classList.add(
-  "animation-wrapper",
-  "col-12",
-  "d-flex",
-  "flex-nowrap",
-  "overflow-hiddens"
-);
-main.classList.add("main");
-extra.classList.add("extra");
+    button.innerHTML = i + 1;
+    buttonWrap.append(button);
+  }
 
-// あらかじめ登場する画像を入れる
-main.append(sliderItems[0]);
-// date-indexという属性を作り、その中身に画像のindexを入れておく
-main.setAttribute("date-index", "0");
-
-sliderShow.append(main);
-sliderShow.append(extra);
-leftContents.append(sliderShow);
-
-// 画像についての情報をまとめるdivを作成
-const info = document.createElement("div");
-info.classList.add("h5", "fw-bold", "mb-5", "rightContents-info");
-
-const number = document.createElement("p");
-const fishName = document.createElement("p");
-const price = document.createElement("p");
-
-// 初期の写真についての情報をあらかじめ設定
-number.innerHTML = "No.1";
-fishName.innerHTML = "Name : " + fishes[0].name;
-price.innerHTML = "Price : " + fishes[0].price;
-
-info.append(number);
-info.append(fishName);
-info.append(price);
-
-// buttonを囲うdivを作成
-const buttonWrap = document.createElement("div");
-buttonWrap.classList.add(
-  "l_contents_button-wrapper",
-  "d-flex",
-  "justify-content-center",
-  "align-items-center",
-  "flex-wrap",
-  "gap-4"
-);
-
-for (let i = 0; i < fishes.length; i++) {
-  let button = document.createElement("button");
-  button.classList.add(
-    "l_contents_button",
-    "fw-bold",
-    "rounded",
-    "d-flex",
-    "justify-content-center",
-    "align-items-center"
-  );
-
-  button.innerHTML = i + 1;
-  buttonWrap.append(button);
-
-  button.addEventListener("click", function () {
-    fishes[i].slideJump(i);
-  });
+  Fish.buttonEvent();
 }
 
-rightContents.append(info);
-rightContents.append(buttonWrap);
+displayFishImg();
+createFishBtn();
