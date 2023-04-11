@@ -7,7 +7,7 @@
   font-size: 16px;
 }
 
-.l_container {
+.container {
   width: 100%;
   height: 100vh;
   background: url(https://1.bp.blogspot.com/-VI4sHNhDuAg/UaVVN4F5BXI/AAAAAAAAUCI/wfAyrH4BEqs/s400/sakana_mure.png.jpg)
@@ -33,11 +33,11 @@
   }
 }
 
-.l_contents-all {
+.contents-wrapper {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-.l_contents {
+.contents {
   width: 90%;
   height: 600px;
   top: 50%;
@@ -50,20 +50,20 @@
   scrollbar-width: none;
 }
 @media screen and (max-width: 1080px) {
-  .l_contents {
+  .contents {
     flex-direction: column;
   }
 }
 
-.l_contents::-webkit-scrollbar {
+.contents::-webkit-scrollbar {
   display: none;
 }
 
-.l_contents_thumb-wrapper {
+.fish-img-wrapper {
   box-shadow: 2px 2px 2px rgba(0, 23, 43, 0.3);
 }
 
-.l_contents_button {
+.fish-btn {
   width: 40px;
   height: 40px;
   border: 2px solid blue;
@@ -72,7 +72,7 @@
   box-shadow: 2px 2px 2px rgba(0, 23, 43, 0.9);
 }
 
-.l_contents_button:hover {
+.fish-btn:hover {
   border: none;
   box-shadow: none;
   color: white;
@@ -100,21 +100,17 @@
   }
 }
 
-.leftContents {
+.left-contents {
   max-width: 600px;
 }
 
-.rightContents {
+.right-contents {
   width: 300px;
   margin-top: 40px;
 }
 @media screen and (min-width: 1080px) {
-  .rightContents {
+  .right-contents {
     margin-top: 0;
     margin-left: 40px;
   }
-}
-
-.rightContents-info {
-  color: blue;
 }
