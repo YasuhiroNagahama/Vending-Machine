@@ -8,11 +8,11 @@ Vending Machine
 
 # Explain
 
-ボタンを押すとその商品の画像が登場し、番号、名前、値段がスクリーンに表示されます。
+ボタンを押すと押した番号に設定されている魚の、画像、名前、値段がスクリーンに表示されます。
 
 # Demo
 
-https://user-images.githubusercontent.com/125679029/223626078-3faf5e90-d26b-4127-b433-70eb1d874f8e.mov
+https://user-images.githubusercontent.com/125679029/231072471-42c996ff-cb62-4b53-8ca5-d51cc2774340.mov
 
 # Features
 
