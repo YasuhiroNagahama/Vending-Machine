@@ -4,7 +4,7 @@ Vending Machine
 
 # URL
 
-https://yasuhironagahama.github.io/Vending-Machine/
+https://yasuhironagahama.github.io/vending-machine/
 
 # Explain
 
